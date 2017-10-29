@@ -79,6 +79,7 @@ HTML
           
           puts "DB QUERY (#{query}) length: #{db[query].to_a.length}"
           count = 0
+          countImp = 0
           db[query].each do |post, idx|
             count+=1
             puts count
@@ -110,6 +111,9 @@ HTML
 
             # Make a file to redirect from the old Drupal URL
             next unless is_published
+            countImp+=1
+            puts countImp
+
             alias_query = self.aliases_query(prefix)
             type = post[:type]
 
