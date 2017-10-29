@@ -78,8 +78,10 @@ HTML
           end
           
           puts "DB QUERY (#{query}) length: #{db[query].to_a.length}"
-          db[query].each.with_index do |post, idx|
-            puts idx
+          count = 0
+          db[query].each do |post, idx|
+            count+=1
+            puts count
             # Get required fields
             data, content = self.post_data(post)
 
