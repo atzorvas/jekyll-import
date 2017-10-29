@@ -77,8 +77,9 @@ module JekyllImport
 HTML
           end
           
-          puts "DB QUERY (#{query}) c: #{db[query].to_a.length}"
-          db[query].each do |post|
+          puts "DB QUERY (#{query}) length: #{db[query].to_a.length}"
+          db[query].each.with_index do |post, idx|
+            puts idx
             # Get required fields
             data, content = self.post_data(post)
 
