@@ -77,6 +77,8 @@ module JekyllImport
 HTML
           end
           
+          require 'securernadom'
+          
           puts "DB QUERY (#{query}) length: #{db[query].to_a.length}"
           count = 0
           countImp = 0
@@ -100,6 +102,8 @@ HTML
             node_id = post[:nid]
             dir = is_published ? dirs[:_posts] : dirs[:_drafts]
             slug = title.strip.downcase.gsub(%r!(&|&amp;)!, " and ").gsub(%r![\s\.\/\\]!, "-").gsub(%r![^\w-]!, "").gsub(%r![-_]{2,}!, "-").gsub(%r!^[-_]!, "").gsub(%r![-_]$!, "")
+            puts "WTF #{title}" if slug.empty? 
+            slug.empty? ? slug = SecureRandom.hex+"_"+node_id
             filename = Time.at(time).to_datetime.strftime("%Y-%m-%d-") + slug + ".md"
 
             # Write out the data and content to file
@@ -120,7 +124,7 @@ HTML
             aliases = db[alias_query, "#{type}/#{node_id}"].all
 
             aliases.push(:alias => "#{type}/#{node_id}")
-
+            
             aliases.each do |url_alias|
               FileUtils.mkdir_p url_alias[:alias]
               File.open("#{url_alias[:alias]}/index.md", "w") do |f|
