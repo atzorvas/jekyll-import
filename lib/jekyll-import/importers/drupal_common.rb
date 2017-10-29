@@ -102,7 +102,7 @@ HTML
             dir = is_published ? dirs[:_posts] : dirs[:_drafts]
             slug = title.strip.downcase.gsub(%r!(&|&amp;)!, " and ").gsub(%r![\s\.\/\\]!, "-").gsub(%r![^\w-]!, "").gsub(%r![-_]{2,}!, "-").gsub(%r!^[-_]!, "").gsub(%r![-_]$!, "")
             puts "WTF #{title}" if slug.empty? 
-            slug = SecureRandom.hex+"_"+node_id if slug.empty?
+            slug = "node_id"+node_id if slug.empty?
             filename = Time.at(time).to_datetime.strftime("%Y-%m-%d-") + slug + ".md"
 
             # Write out the data and content to file
