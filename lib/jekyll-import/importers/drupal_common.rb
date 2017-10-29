@@ -35,6 +35,7 @@ module JekyllImport
             mysql2
             fileutils
             safe_yaml
+            securerandom
           ))
         end
 
@@ -76,9 +77,7 @@ module JekyllImport
 </html>
 HTML
           end
-          
-          require 'securernadom'
-          
+                    
           puts "DB QUERY (#{query}) length: #{db[query].to_a.length}"
           count = 0
           countImp = 0
